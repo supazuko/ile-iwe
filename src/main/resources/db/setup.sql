@@ -1,5 +1,5 @@
-create database ileiwe_db;
+create database if not exists iwedb;
 
-create user 'learner'@'localhost' identified by 'learn123';
-grant all privileges on ileiwe_db.* to 'learner'@'localhost';
+create user if not exists 'learner'@'localhost' identified by 'learn123';
+grant all privileges on iwedb.* to 'learner'@'localhost';
 flush privileges ;

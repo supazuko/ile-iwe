@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Slf4j
-@Sql(scripts = {"/db/insert.sql"})
+//@Sql(scripts = {"/db/insert.sql"})
 class IleIweApplicationTests {
 
 	@Autowired
@@ -22,6 +22,11 @@ class IleIweApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+	}
+
+	@Test
+	void connectionToDatabaseTest(){
 		assertThat(dataSource).isNotNull();
 		log.info("Database properties ->{}", dataSource);
 
@@ -29,6 +34,7 @@ class IleIweApplicationTests {
 		try {
 			connection = dataSource.getConnection();
 			assertThat(connection).isNotNull();
+			assertThat(connection.getCatalog()).isEqualTo("iwedb");
 			log.info("Database connection ->{}", connection.getCatalog());
 		} catch (SQLException exception) {
 			log.info("An exception occurred -> {}", exception.getMessage());
