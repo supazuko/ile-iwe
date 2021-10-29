@@ -24,14 +24,15 @@ public class Instructor {
     private String firstname;
     @Column(nullable = false)
     private String lastname;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     private String specialization;
     @Column(length = 1000)
     private String bio;
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn
+//    @JoinColumn
     private LearningParty learningParty;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Course> courses;
 
 }

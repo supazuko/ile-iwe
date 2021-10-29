@@ -86,9 +86,19 @@ public class LearningPartyRepositoryTest {
                 learningPartyRepository.save(learningUser));
     }
 
+    @Test
+    @Transactional
+    void findByUserNameTest(){
+        LearningParty user = learningPartyRepository.findByEmail("you@email.com");
+        learningPartyRepository.save(user);
+        assertThat(user.getId()).isNotNull();
+        assertThat(user.getEmail()).isEqualTo("you@email.com");
+
+        log.info("learning party object -> {}", user);
+
+    }
 
     @AfterEach
     void tearDown(){
-
     }
 }

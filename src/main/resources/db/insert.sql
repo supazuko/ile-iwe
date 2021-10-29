@@ -15,10 +15,13 @@ truncate table instructor;
 --       (5, 'Austin', 'Ekweozor', 'MALE'),
 --       (6, 'Bolu', 'Fadoju', 'FEMALE');
 --
--- insert into learning_party(id, email, password,enabled)
--- values(7, 'iseAyeni@gmail.com', 'ay123', true),
---       (8, 'ekwe@gmail.com', 'eboy123', true),
---       (9, 'bm@gmail.com', 'fad123', false );
+insert into learning_party(`id`, `email`, `password`, `enabled`)
+values(123, 'ise@email.com', 'ise123', false),
+      (124, 'yiu@email.com', 'yiu123', false),
+      (125, 'toni@email.com', 'toni123', false),
+      (126, 'dan@email.com', 'dan123', false),
+      (127, 'easy@email.com', 'easy123', false),
+      (128, 'mike@email.com', 'mike123', false);
 --
 -- insert into instructor(id, first_name, last_name, gender, specialization, bio)
 -- values(10, 'Ifeanyi', 'MC', 'MALE', 'all sciences', 'lorem'),
