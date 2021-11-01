@@ -3,6 +3,7 @@ package com.ileiwe.security.user;
 import com.ileiwe.data.model.Authority;
 import com.ileiwe.data.model.LearningParty;
 import com.ileiwe.data.repository.LearningPartyRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -11,11 +12,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
+@Transactional
 public class LearningPartyServiceImpl implements UserDetailsService {
 
     @Autowired

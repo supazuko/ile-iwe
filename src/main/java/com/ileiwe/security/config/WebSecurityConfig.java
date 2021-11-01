@@ -3,6 +3,7 @@ package com.ileiwe.security.config;
 import com.ileiwe.security.user.LearningPartyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,11 +29,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/instructor").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .addFilter(new JWTAuthenticationFilter())
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 .exceptionHandling()
                 .and()
@@ -46,13 +49,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder);
     }
 
-    @Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    }
+//    @Override
+//    protected AuthenticationManager authenticationManager() throws Exception {
+//        return super.authenticationManager();
+//    }
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+
 }

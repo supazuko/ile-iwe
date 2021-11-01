@@ -28,20 +28,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private AuthenticationManager authManager;
 
-    @Override
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
-        super.setAuthenticationManager(authenticationManager);
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager){
+        this.authManager = authenticationManager;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         try{
-            LearningParty user = new ObjectMapper()
+            LearningParty credentials = new ObjectMapper()
                     .readValue(request.getInputStream(), LearningParty.class);
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    user.getEmail(), user.getPassword());
+                    credentials.getEmail(), credentials.getPassword());
 
             return authManager.authenticate(authToken);
 
